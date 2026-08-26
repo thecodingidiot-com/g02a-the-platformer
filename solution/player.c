@@ -16,18 +16,15 @@ void    player_init(t_player *p, float x, float y)
 void    player_handle_input(t_player *p, Uint8 const *keys)
 {
     p->vx = 0.0f;
-    if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_H])
-    {
+    if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_H]) {
         p->vx = -MOVE_SPEED;
         p->facing = -1;
     }
-    if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_L])
-    {
+    if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_L]) {
         p->vx = MOVE_SPEED;
         p->facing = 1;
     }
-    if (keys[SDL_SCANCODE_SPACE] && p->on_ground)
-    {
+    if (keys[SDL_SCANCODE_SPACE] && p->on_ground) {
         p->vy = JUMP_SPEED;
         p->on_ground = 0;
     }
@@ -53,14 +50,11 @@ static void move_x(t_player *p, t_map const *map)
     top_tile = tile_index((int)p->y);
     bottom_tile = tile_index((int)(p->y + PLAYER_HEIGHT - 1));
     if (p->vx > 0 && (map_is_solid(map, right_tile, top_tile)
-            || map_is_solid(map, right_tile, bottom_tile)))
-    {
+            || map_is_solid(map, right_tile, bottom_tile))) {
         p->x = (float)(right_tile * TILE_SIZE - PLAYER_WIDTH);
         p->vx = 0.0f;
-    }
-    else if (p->vx < 0 && (map_is_solid(map, left_tile, top_tile)
-            || map_is_solid(map, left_tile, bottom_tile)))
-    {
+    } else if (p->vx < 0 && (map_is_solid(map, left_tile, top_tile)
+            || map_is_solid(map, left_tile, bottom_tile))) {
         p->x = (float)((left_tile + 1) * TILE_SIZE);
         p->vx = 0.0f;
     }
@@ -79,14 +73,11 @@ static void move_y(t_player *p, t_map const *map)
     top_tile = tile_index((int)p->y);
     bottom_tile = tile_index((int)(p->y + PLAYER_HEIGHT - 1));
     if (p->vy > 0 && (map_is_solid(map, left_tile, bottom_tile)
-            || map_is_solid(map, right_tile, bottom_tile)))
-    {
+            || map_is_solid(map, right_tile, bottom_tile))) {
         p->y = (float)(bottom_tile * TILE_SIZE - PLAYER_HEIGHT);
         p->vy = 0.0f;
-    }
-    else if (p->vy < 0 && (map_is_solid(map, left_tile, top_tile)
-            || map_is_solid(map, right_tile, top_tile)))
-    {
+    } else if (p->vy < 0 && (map_is_solid(map, left_tile, top_tile)
+            || map_is_solid(map, right_tile, top_tile))) {
         p->y = (float)((top_tile + 1) * TILE_SIZE);
         p->vy = 0.0f;
     }
@@ -114,24 +105,18 @@ void    player_resolve_collision(t_player *p, t_map const *map)
 
 void    player_update_animation(t_player *p)
 {
-    if (!p->on_ground)
-    {
+    if (!p->on_ground) {
         p->anim = ANIM_JUMP;
         p->frame = 0;
         p->frame_timer = 0;
-    }
-    else if (p->vx != 0.0f)
-    {
+    } else if (p->vx != 0.0f) {
         p->anim = ANIM_WALK;
         p->frame_timer++;
-        if (p->frame_timer >= 8)
-        {
+        if (p->frame_timer >= 8) {
             p->frame_timer = 0;
             p->frame = 1 - p->frame;
         }
-    }
-    else
-    {
+    } else {
         p->anim = ANIM_IDLE;
         p->frame = 0;
         p->frame_timer = 0;
