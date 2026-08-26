@@ -49,7 +49,8 @@ int main(int argc, char **argv)
         {
             if (ev.type == SDL_QUIT)
                 running = 0;
-            if (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_ESCAPE)
+            if (ev.type == SDL_KEYDOWN && (ev.key.keysym.sym == SDLK_ESCAPE
+                    || ev.key.keysym.sym == SDLK_q))
                 running = 0;
         }
         keys = SDL_GetKeyboardState(NULL);

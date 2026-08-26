@@ -126,3 +126,10 @@ int map_is_solid(t_map const *map, int tile_x, int tile_y)
     tile = map_tile_at(map, tile_x, tile_y);
     return (tile == TILE_GROUND || tile == TILE_PLATFORM);
 }
+
+int tile_index(int pixel)
+{
+    if (pixel < 0)
+        return ((pixel - (TILE_SIZE - 1)) / TILE_SIZE);
+    return (pixel / TILE_SIZE);
+}

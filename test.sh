@@ -183,6 +183,46 @@ int main(void)
     check_int("walking right stops at the wall (x)", (int)p.x, 164);
     check_int("walking right stops at the wall (still grounded)", p.on_ground, 1);
 
+    /* regression: walking left past the map's own edge used to drift into
+     * negative x before snapping back -- signed integer division truncates
+     * toward zero, not floor, so a naive (int)x / TILE_SIZE misreads small
+     * negative positions as tile column 0 instead of off the map entirely. */
+    player_init(&p, 100.0f, 116.0f);
+    p.on_ground = 1;
+    i = 0;
+    while (i < 60)
+    {
+        p.vx = -MOVE_SPEED;
+        player_update_physics(&p);
+        player_resolve_collision(&p, &map);
+        i++;
+    }
+    check_int("walking left stops cleanly at the map's left edge", (int)p.x, 0);
+
+    /* regression: on_ground used to flicker 0/1 every other frame while
+     * genuinely at rest (gravity nudges the player a sub-pixel amount each
+     * frame before the next frame's collision re-snaps it), which flickered
+     * the idle/jump animation frames against each other. */
+    player_init(&p, 32.0f, 0.0f);
+    i = 0;
+    while (i < 100)
+    {
+        player_update_physics(&p);
+        player_resolve_collision(&p, &map);
+        i++;
+    }
+    i = 0;
+    while (i < 20)
+    {
+        p.vx = 0.0f;
+        player_update_physics(&p);
+        player_resolve_collision(&p, &map);
+        if (!p.on_ground)
+            break;
+        i++;
+    }
+    check_int("on_ground never drops while genuinely at rest", i, 20);
+
     camera_init(&cam);
     camera_update(&cam, 0.0f, &map);
     check_int("camera clamps at the left map edge", cam.x, 0);

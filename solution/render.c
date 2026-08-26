@@ -11,8 +11,8 @@ void    render_map(t_map const *map, SDL_Renderer *ren,
     SDL_Rect    src;
     SDL_Rect    dst;
 
-    first_col = camera_x / TILE_SIZE;
-    last_col = (camera_x + WINDOW_W) / TILE_SIZE + 1;
+    first_col = tile_index(camera_x);
+    last_col = tile_index(camera_x + WINDOW_W) + 1;
     if (last_col > map->width)
         last_col = map->width;
     y = 0;
