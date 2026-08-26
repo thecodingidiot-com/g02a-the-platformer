@@ -26,7 +26,7 @@ void    player_handle_input(t_player *p, Uint8 const *keys)
         p->vx = MOVE_SPEED;
         p->facing = 1;
     }
-    if ((keys[SDL_SCANCODE_SPACE] || keys[SDL_SCANCODE_K]) && p->on_ground)
+    if (keys[SDL_SCANCODE_SPACE] && p->on_ground)
     {
         p->vy = JUMP_SPEED;
         p->on_ground = 0;
