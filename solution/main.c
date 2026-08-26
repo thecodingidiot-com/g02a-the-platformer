@@ -19,18 +19,15 @@ int main(int argc, char **argv)
     Uint8 const     *keys;
     int             running;
 
-    if (argc < 2)
-    {
+    if (argc < 2) {
         tci_printf("usage: %s <map_file>\n", argv[0]);
         return (1);
     }
-    if (!map_load(&map, argv[1]))
-    {
+    if (!map_load(&map, argv[1])) {
         tci_printf("failed to load map: %s\n", argv[1]);
         return (1);
     }
-    if (SDL_Init(SDL_INIT_VIDEO) != 0)
-    {
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         SDL_Log("SDL_Init: %s", SDL_GetError());
         return (1);
     }
@@ -43,10 +40,8 @@ int main(int argc, char **argv)
     player_init(&player, (float)map.start_x, (float)map.start_y);
     camera_init(&camera);
     running = 1;
-    while (running)
-    {
-        while (SDL_PollEvent(&ev))
-        {
+    while (running) {
+        while (SDL_PollEvent(&ev)) {
             if (ev.type == SDL_QUIT)
                 running = 0;
             if (ev.type == SDL_KEYDOWN && (ev.key.keysym.sym == SDLK_ESCAPE

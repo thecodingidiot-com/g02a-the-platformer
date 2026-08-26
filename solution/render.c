@@ -16,14 +16,11 @@ void    render_map(t_map const *map, SDL_Renderer *ren,
     if (last_col > map->width)
         last_col = map->width;
     y = 0;
-    while (y < map->height)
-    {
+    while (y < map->height) {
         x = first_col;
-        while (x < last_col)
-        {
+        while (x < last_col) {
             tile = map_tile_at(map, x, y);
-            if (tile != TILE_EMPTY)
-            {
+            if (tile != TILE_EMPTY) {
                 src.x = (tile - 1) * TILE_SIZE;
                 src.y = 0;
                 src.w = TILE_SIZE;

@@ -23,8 +23,7 @@ static int  parse_dimensions(int fd, int *width, int *height)
         return (0);
     trim_newline(line);
     space = tci_strchr(line, ' ');
-    if (!space)
-    {
+    if (!space) {
         free(line);
         return (0);
     }
@@ -41,14 +40,12 @@ static int  tile_for_char(char c, t_map *map, int x, int y)
         return (TILE_GROUND);
     if (c == '=')
         return (TILE_PLATFORM);
-    if (c == 'S')
-    {
+    if (c == 'S') {
         map->start_x = x * TILE_SIZE;
         map->start_y = y * TILE_SIZE;
         return (TILE_EMPTY);
     }
-    if (c == 'G')
-    {
+    if (c == 'G') {
         map->goal_x = x * TILE_SIZE;
         map->goal_y = y * TILE_SIZE;
         return (TILE_EMPTY);
@@ -66,14 +63,12 @@ int map_load(t_map *map, char const *path)
     fd = open(path, O_RDONLY);
     if (fd < 0)
         return (0);
-    if (!parse_dimensions(fd, &map->width, &map->height))
-    {
+    if (!parse_dimensions(fd, &map->width, &map->height)) {
         close(fd);
         return (0);
     }
     map->tiles = malloc(sizeof(int) * map->width * map->height);
-    if (!map->tiles)
-    {
+    if (!map->tiles) {
         close(fd);
         return (0);
     }
@@ -82,18 +77,15 @@ int map_load(t_map *map, char const *path)
     map->goal_x = 0;
     map->goal_y = 0;
     y = 0;
-    while (y < map->height)
-    {
+    while (y < map->height) {
         line = tci_getline(fd);
-        if (!line)
-        {
+        if (!line) {
             close(fd);
             return (0);
         }
         trim_newline(line);
         x = 0;
-        while (x < map->width)
-        {
+        while (x < map->width) {
             map->tiles[y * map->width + x] = tile_for_char(line[x], map, x, y);
             x++;
         }
