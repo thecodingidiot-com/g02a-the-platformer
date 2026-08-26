@@ -23,5 +23,6 @@ int     map_load(t_map *map, char const *path);
 void    map_free(t_map *map);
 int     map_tile_at(t_map const *map, int tile_x, int tile_y);
 int     map_is_solid(t_map const *map, int tile_x, int tile_y);
+int     tile_index(int pixel);
 
 #endif
