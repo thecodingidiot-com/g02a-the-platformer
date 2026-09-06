@@ -68,7 +68,7 @@ cd solution
 make -C libtci re
 bash gen_assets.sh
 make re
-./platformer level1.txt
+./platformer ../fixtures/level1.txt
 ```
 
 Controls: Left/Right arrows to move, Space to jump, Escape or closing
