@@ -69,11 +69,15 @@ make re
 ./platformer ../g02a-practice/fixtures/level1.txt   # wherever your clone is
 ```
 
+Page 01 starts from nothing but `libtci/`; pages 02 and 03 both start from
+`steps/01-setup`, since page 02 only generates the art.
+
 `-L` copies the shared `libtci/` and `gen_assets.sh` (symlinks to
 `solution/`'s) as real files, so the copy stands on its own.
 
 | folder | the end of page | what you see when it runs |
 |---|---|---|
+| `steps/01-setup` | 01 Setup (and 02, which writes no C) | an empty blue window |
 | `steps/03-the-tile-map` | 03 The Tile Map | the map; nothing moves |
 | `steps/04-sprites-and-input` | 04 Sprites and Input | the player walks, and walks off the ground |
 | `steps/05-platform-physics` | 05 Platform Physics | the player falls through the ground at once |
