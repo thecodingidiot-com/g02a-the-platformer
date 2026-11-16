@@ -26,6 +26,40 @@ All tests must pass before the chapter is complete.
 
 ---
 
+## Start at any page
+
+`steps/` holds the program as it stands at the end of each chapter page,
+so you can begin anywhere without having written the pages before it.
+To start on page 05, copy the end of page 04 and build it:
+
+```bash
+cp -rL steps/04-sprites-and-input ~/g02a-from-page-05
+cd ~/g02a-from-page-05
+make -C libtci re
+bash gen_assets.sh
+make re
+./platformer ../g02a-practice/fixtures/level1.txt   # wherever your clone is
+```
+
+`-L` copies the shared `libtci/` and `gen_assets.sh` (symlinks to
+`solution/`'s) as real files, so the copy stands on its own.
+
+| folder | the end of page | what you see when it runs |
+|---|---|---|
+| `steps/03-the-tile-map` | 03 The Tile Map | the map; nothing moves |
+| `steps/04-sprites-and-input` | 04 Sprites and Input | the player walks, and walks off the ground |
+| `steps/05-platform-physics` | 05 Platform Physics | the player falls through the ground at once |
+| `steps/06-collision-first-try` | 06 Collision, before its two fixes | it stands, but flickers, and drifts past the left edge |
+| `steps/06-collision` | 06 Collision | it stands, walks and jumps |
+| `solution/` | 07 The Camera | the finished game |
+
+Each folder has every file; one whose code a later page writes says so in
+a comment. The bugs in `05` and `06-collision-first-try` are the ones the
+chapter fixes, kept on purpose. The chapter page plays each of them in
+the browser.
+
+---
+
 ## Follow your journey
 
 Building `platformer` independently? Here is the full project brief.
