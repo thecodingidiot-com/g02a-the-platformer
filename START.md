@@ -7,8 +7,13 @@ root. No terminal? *Terminal → New Terminal*.
 ## 1. Open the game's window
 
 Open the **Ports** panel, next to the Terminal. Port 6080, *Game window*:
-click the globe beside it. A desktop opens in a new browser tab, and every
-window the game opens shows up there. Keep that tab.
+click the globe beside it. A black desktop opens in a new browser tab: it
+stays empty until you run the game, whose window then shows up there. Keep
+that tab.
+
+*502 Bad Gateway* instead? The desktop is still starting; the port is listed
+before anything answers on it. Wait a few seconds and reload the tab. Still
+502 after a minute? Run `desktop.sh` in the terminal, then reload.
 
 ## 2. Go back to the chapter
 
