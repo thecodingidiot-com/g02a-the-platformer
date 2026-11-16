@@ -14,8 +14,11 @@ opens. Three ways to use it, the same files each time:
 - **In the browser:** [open in GitHub Codespaces](https://codespaces.new/thecodingidiot-com/g02a-the-platformer).
   A terminal opens with everything built. When port 6080 appears, open it,
   then run the game from the terminal; its window shows in that tab.
-- **VS Code on your machine** (with Docker or Podman): *Reopen in
-  Container*, then the same.
+- **VS Code on your machine:** needs Docker or Podman and the *Dev
+  Containers* extension. Open the cloned folder; VS Code offers **Reopen in
+  Container** (or `F1` → *Dev Containers: Reopen in Container*). With
+  Podman, set *Dev › Containers: Docker Path* to `podman` first. The game's
+  window is at <http://localhost:6080>.
 - **Just a container:**
 
   ```bash
@@ -26,7 +29,9 @@ opens. Three ways to use it, the same files each time:
   ./platformer ../fixtures/level1.txt
   ```
 
-  and open <http://localhost:6080/vnc.html?autoconnect=1&resize=scale>.
+  and open <http://localhost:6080>.
+
+Already inside the container? [START.md](START.md) says what to do next.
 
 Already have SDL2 and a compiler? None of this is needed; the steps below
 work on your own machine as they always did.

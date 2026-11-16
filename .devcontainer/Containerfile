@@ -14,5 +14,10 @@ RUN apt-get update \
       tigervnc-standalone-server novnc python3-websockify \
  && rm -rf /var/lib/apt/lists/*
 
+# noVNC ships no index.html, so port 6080 on its own shows a file listing. Send
+# it straight to the desktop instead, connected and scaled to the tab.
+RUN printf '%s\n' '<!doctype html><meta http-equiv="refresh" content="0; url=vnc.html?autoconnect=1&resize=scale">' \
+      > /usr/share/novnc/index.html
+
 COPY --chmod=0755 desktop.sh /usr/local/bin/desktop.sh
 ENV DISPLAY=:1
