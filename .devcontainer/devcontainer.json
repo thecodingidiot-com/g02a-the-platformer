@@ -11,6 +11,9 @@
   "postCreateCommand": "make -C solution/libtci re && cd solution && bash gen_assets.sh",
   "postStartCommand": "desktop.sh",
   "customizations": {
-    "vscode": { "extensions": ["ms-vscode.cpptools"] }
+    "vscode": { "extensions": ["ms-vscode.cpptools"] },
+    // Codespaces would open README.md, which starts by telling you to open a
+    // Codespace. START.md is written for someone already inside.
+    "codespaces": { "openFiles": ["START.md"] }
   }
 }

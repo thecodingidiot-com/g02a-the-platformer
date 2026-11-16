@@ -31,6 +31,8 @@ opens. Three ways to use it, the same files each time:
 
   and open <http://localhost:6080>.
 
+Already inside the container? [START.md](START.md) says what to do next.
+
 Already have SDL2 and a compiler? None of this is needed; the steps below
 work on your own machine as they always did.
 
