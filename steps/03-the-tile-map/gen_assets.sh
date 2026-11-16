@@ -1,0 +1,1 @@
+../../solution/gen_assets.sh
