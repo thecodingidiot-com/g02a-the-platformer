@@ -1,0 +1,18 @@
+# The toolchain for The Coding Idiot's C and game chapters: the compiler, the
+# debuggers, SDL2 with the image/ttf/mixer libraries the games use, and Pillow for
+# the asset generators. Nothing chapter-specific, so one image can serve them all.
+#
+# Plus a desktop in a browser tab, so a game's window has somewhere to open: a VNC
+# server on display :1 and noVNC on port 6080 (desktop.sh starts both).
+FROM docker.io/library/debian:trixie-slim
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      build-essential gdb valgrind git ca-certificates \
+      libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-mixer-dev \
+      python3 python3-pil \
+      tigervnc-standalone-server novnc python3-websockify \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY --chmod=0755 desktop.sh /usr/local/bin/desktop.sh
+ENV DISPLAY=:1

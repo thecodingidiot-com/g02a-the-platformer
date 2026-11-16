@@ -5,6 +5,34 @@ Companion repository for **g02a — The Platformer** at
 
 ---
 
+## Open it with nothing installed
+
+`.devcontainer/` describes the whole toolchain: the compiler, valgrind,
+SDL2 and Pillow, plus a desktop in a browser tab where the game's window
+opens. Three ways to use it, the same files each time:
+
+- **In the browser:** [open in GitHub Codespaces](https://codespaces.new/thecodingidiot-com/g02a-the-platformer).
+  A terminal opens with everything built. When port 6080 appears, open it,
+  then run the game from the terminal; its window shows in that tab.
+- **VS Code on your machine** (with Docker or Podman): *Reopen in
+  Container*, then the same.
+- **Just a container:**
+
+  ```bash
+  podman build -t tci-g02a .devcontainer          # or docker
+  podman run --rm -it -p 127.0.0.1:6080:6080 -v "$PWD:/work:Z" -w /work tci-g02a bash
+  desktop.sh                                      # inside: the browser desktop
+  make -C solution/libtci re && cd solution && bash gen_assets.sh && make re
+  ./platformer ../fixtures/level1.txt
+  ```
+
+  and open <http://localhost:6080/vnc.html?autoconnect=1&resize=scale>.
+
+Already have SDL2 and a compiler? None of this is needed; the steps below
+work on your own machine as they always did.
+
+---
+
 ## Follow my journey
 
 Working through g02a alongside the implementation pages? Build

@@ -1,0 +1,16 @@
+{
+  "name": "g02a — The Platformer",
+  "build": { "dockerfile": "Containerfile" },
+  // The game's window opens in a desktop in your browser: port 6080 (desktop.sh).
+  "forwardPorts": [6080],
+  "portsAttributes": {
+    "6080": { "label": "Game window", "onAutoForward": "notify" }
+  },
+  // Build the shared library and the art once, so the solution and every steps/
+  // folder are ready to `make re`.
+  "postCreateCommand": "make -C solution/libtci re && cd solution && bash gen_assets.sh",
+  "postStartCommand": "desktop.sh",
+  "customizations": {
+    "vscode": { "extensions": ["ms-vscode.cpptools"] }
+  }
+}
